@@ -13,7 +13,10 @@ import {
   AlertTriangle, 
   CheckCircle, 
   Clock,
-  Upload
+  Upload,
+  Heart,
+  Users,
+  IndianRupee
 } from "lucide-react";
 
 const ReportIssuePage = () => {
@@ -322,6 +325,148 @@ const ReportIssuePage = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+      </div>
+
+      {/* Community Issues with Donations Section */}
+      <div className="mt-16">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold tracking-tight mb-2">Community Support Issues</h2>
+          <p className="text-muted-foreground">
+            Help fund solutions to ongoing community issues through donations
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              id: 1,
+              title: "Community Park Renovation",
+              description: "Upgrade playground equipment and add new benches for families in Jubilee Hills Community Park.",
+              category: "Parks & Recreation",
+              location: "Jubilee Hills",
+              targetAmount: 250000,
+              raisedAmount: 187500,
+              donorCount: 125,
+              priority: "medium",
+              image: "🏞️"
+            },
+            {
+              id: 2,
+              title: "Street Light Installation",
+              description: "Install LED street lights in poorly lit areas to improve safety for evening commuters.",
+              category: "Public Safety",
+              location: "Kukatpally",
+              targetAmount: 150000,
+              raisedAmount: 98000,
+              donorCount: 89,
+              priority: "high",
+              image: "💡"
+            },
+            {
+              id: 3,
+              title: "School Library Books",
+              description: "Purchase new books and educational materials for government school library in Secunderabad.",
+              category: "Education",
+              location: "Secunderabad",
+              targetAmount: 75000,
+              raisedAmount: 75000,
+              donorCount: 156,
+              priority: "low",
+              image: "📚"
+            },
+            {
+              id: 4,
+              title: "Water Purification System",
+              description: "Install water purification systems in areas facing contaminated water supply issues.",
+              category: "Utilities",
+              location: "Old City",
+              targetAmount: 180000,
+              raisedAmount: 134000,
+              donorCount: 78,
+              priority: "high",
+              image: "💧"
+            }
+          ].map((issue) => {
+            const progressPercentage = Math.round((issue.raisedAmount / issue.targetAmount) * 100);
+            const isCompleted = progressPercentage >= 100;
+            
+            return (
+              <Card key={issue.id} className="hover:shadow-card transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="text-2xl">{issue.image}</div>
+                    <Badge className={priorities.find(p => p.value === issue.priority)?.color}>
+                      {issue.priority}
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-lg leading-tight">{issue.title}</CardTitle>
+                  <div className="flex items-center space-x-2">
+                    <Badge variant="outline" className="text-xs">
+                      {issue.category}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-muted-foreground line-clamp-3">
+                    {issue.description}
+                  </p>
+                  
+                  <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                    <MapPin className="h-3 w-3" />
+                    <span>{issue.location}</span>
+                  </div>
+                  
+                  {/* Progress Bar */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Progress</span>
+                      <span className={`font-medium ${isCompleted ? 'text-green-600' : 'text-primary'}`}>
+                        {progressPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className={`h-2 rounded-full transition-all ${
+                          isCompleted ? 'bg-green-500' : 'bg-primary'
+                        }`}
+                        style={{ width: `${Math.min(progressPercentage, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Donation Info */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center space-x-1">
+                        <IndianRupee className="h-4 w-4 text-muted-foreground" />
+                        <span className="font-medium">
+                          ₹{issue.raisedAmount.toLocaleString('en-IN')}
+                        </span>
+                        <span className="text-muted-foreground">
+                          of ₹{issue.targetAmount.toLocaleString('en-IN')}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+                      <Users className="h-4 w-4" />
+                      <span>{issue.donorCount} donors</span>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    className="w-full" 
+                    variant={isCompleted ? "outline" : "default"}
+                    disabled={isCompleted}
+                  >
+                    <Heart className="h-4 w-4 mr-2" />
+                    {isCompleted ? "Goal Achieved!" : "Donate Now"}
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </div>
