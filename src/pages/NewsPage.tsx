@@ -24,7 +24,9 @@ const NewsPage = () => {
     { id: "public-safety", name: "Public Safety" },
     { id: "transportation", name: "Transportation" },
     { id: "community", name: "Community Events" },
-    { id: "development", name: "Development" }
+    { id: "development", name: "Development" },
+    { id: "social-issues", name: "Social Issues" },
+    { id: "civil-issues", name: "Civil Issues" }
   ];
 
   const newsArticles = [
@@ -154,6 +156,42 @@ const NewsPage = () => {
       source: "NIMS Hyderabad",
       publishedAt: "2025-09-02T13:45:00Z",
       location: "Punjagutta"
+    },
+    {
+      id: 15,
+      title: "Hyderabad Launches Anti-Poverty Initiative for Urban Slums",
+      summary: "New program provides skill development, microfinance, and healthcare access to families in urban slums across the city to reduce poverty levels.",
+      category: "social-issues",
+      source: "Telangana Social Welfare",
+      publishedAt: "2025-09-01T10:30:00Z",
+      location: "Various Slum Areas"
+    },
+    {
+      id: 16,
+      title: "Citizens File PIL Against Unauthorized Construction in Old City",
+      summary: "Public Interest Litigation filed by citizens' group challenges illegal constructions that violate heritage guidelines in the historic Old City area.",
+      category: "civil-issues",
+      source: "High Court Hyderabad",
+      publishedAt: "2025-08-31T14:20:00Z",
+      location: "Old City Heritage Zone"
+    },
+    {
+      id: 17,
+      title: "Mental Health Support Centers Established in All Districts",
+      summary: "Government establishes 50 new mental health centers with trained counselors to address rising mental health issues among youth and adults.",
+      category: "social-issues",
+      source: "Health Department Telangana",
+      publishedAt: "2025-08-30T09:45:00Z",
+      location: "All Districts"
+    },
+    {
+      id: 18,
+      title: "GHMC Addresses Illegal Dumping Through Community Courts",
+      summary: "Special community courts set up to handle cases of illegal waste dumping and environmental violations with faster resolution times.",
+      category: "civil-issues",
+      source: "GHMC Environment Wing",
+      publishedAt: "2025-08-29T16:10:00Z",
+      location: "Greater Hyderabad"
     }
   ];
 
@@ -240,7 +278,9 @@ const NewsPage = () => {
       "public-safety": "bg-red-100 text-red-800",
       "transportation": "bg-green-100 text-green-800",
       "community": "bg-purple-100 text-purple-800",
-      "development": "bg-orange-100 text-orange-800"
+      "development": "bg-orange-100 text-orange-800",
+      "social-issues": "bg-pink-100 text-pink-800",
+      "civil-issues": "bg-indigo-100 text-indigo-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
@@ -421,6 +461,34 @@ const NewsPage = () => {
               </Button>
             </CardContent>
           </Card>
+        </div>
+      </div>
+
+      {/* Newsletter Subscription Section */}
+      <div className="mt-16 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="flex items-center justify-center mb-4">
+            <div className="h-12 w-12 rounded-lg bg-gradient-civic flex items-center justify-center">
+              <Newspaper className="h-6 w-6 text-white" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold mb-2">Stay Updated with Hyderabad News</h2>
+          <p className="text-muted-foreground mb-6">
+            Subscribe to our newsletter and get the latest city updates, government announcements, and community news delivered to your inbox.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <Input 
+              type="email" 
+              placeholder="Enter your email address" 
+              className="flex-1"
+            />
+            <Button className="sm:w-auto w-full">
+              Subscribe Now
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground mt-3">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
         </div>
       </div>
     </div>
